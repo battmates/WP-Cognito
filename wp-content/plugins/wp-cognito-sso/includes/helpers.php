@@ -93,6 +93,7 @@ function wcsso_get_excluded_paths() {
 }
 
 function wcsso_is_request_excluded() {
+    $settings = wcsso_get_settings();
     if (is_admin() || wp_doing_ajax() || wp_doing_cron()) {
         return true;
     }
@@ -102,7 +103,11 @@ function wcsso_is_request_excluded() {
     }
 
     $request_uri = $_SERVER['REQUEST_URI'] ?? '';
-    if (strpos($request_uri, 'wp-login.php') !== false || strpos($request_uri, 'wp-admin') !== false) {
+    $allow_login_hijack = !empty($settings['login_enabled']);
+    if (
+        !$allow_login_hijack &&
+        (strpos($request_uri, 'wp-login.php') !== false || strpos($request_uri, 'wp-admin') !== false)
+    ) {
         return true;
     }
 

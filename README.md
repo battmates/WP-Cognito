@@ -1,6 +1,11 @@
 # WP-Cognito
 A Wordpress plugin to authenticate via the AWS Cognito Hosted UI
 
+## Requirements
+
+- WordPress 6.0+
+- PHP 8.0+
+
 ## Install
 
 1. Copy the plugin to `wp-content/plugins/wp-cognito-sso`.
@@ -24,7 +29,8 @@ composer install --no-dev --optimize-autoloader
 7. Optional: enable WP → Cognito sync and provide AWS credentials + user pool ID.
 
 Notes:
-- This plugin uses the Amazon AWS SDK which can be installed via Composer.
+- Tested up to WordPress 6.9.
+- This plugin uses the AWS SDK for PHP (Apache 2.0 license) when sync is enabled.
 - The callback endpoint is the redirect path (default `/cognito-login`).
 - Auto redirect excludes wp-admin, wp-login.php, REST/AJAX, and any excluded paths.
 - JWT verification is on by default; disable only if you cannot fetch JWKS.
