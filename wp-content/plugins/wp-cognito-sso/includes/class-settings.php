@@ -14,8 +14,8 @@ class WCSSO_Settings {
 
     public static function add_menu() {
         add_options_page(
-            'Cognito SSO',
-            'Cognito SSO',
+            'Cognito Hosted UI',
+            'Cognito Hosted UI',
             'manage_options',
             'wcsso-settings',
             [__CLASS__, 'render_page']
@@ -129,10 +129,10 @@ class WCSSO_Settings {
 
         ?>
         <div class="wrap">
-            <h1><?php echo esc_html__('Cognito SSO', 'wcsso'); ?></h1>
+            <h1><?php echo esc_html__('Wordpress AWS Cognito Hosted UI', 'wcsso'); ?></h1>
 
-            <p><img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr__('Cognito SSO', 'wcsso'); ?>" width="300" /></p>
-            
+            <p><img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr__('Plugin by RSL Group', 'wcsso'); ?>" width="300" /></p>
+
             <form method="post" action="options.php">
                 <?php settings_fields('wcsso_settings_group'); ?>
 
