@@ -44,7 +44,7 @@ Only if you enable WordPress -> Cognito user sync. Hosted UI login works without
 
 = Does this plugin send users to Cognito automatically? =
 
-Yes, if you enable "Auto redirect". Requests to wp-admin, wp-login.php, REST/AJAX, and excluded paths are not redirected.
+Yes, if you enable "Auto redirect" all visitors are redrecited. REST/AJAX, and excluded paths are not redirected. With only "Enable Hosted UI login" enabled it will redirect only the logins for the wp-admin dahsboard.
 
 == Screenshots ==
 
