@@ -1,1 +1,4 @@
 /.vscode
+.DS_Store
+examples/
+wp-content/plugins/wp-cognito-sso/vendor/

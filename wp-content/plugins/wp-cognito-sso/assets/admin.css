@@ -1,0 +1,7 @@
+#wcsso-role-mapping-table select {
+  min-width: 180px;
+}
+
+#wcsso-role-mapping-table input.regular-text {
+  width: 100%;
+}
