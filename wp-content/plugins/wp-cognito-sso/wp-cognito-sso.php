@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Cognito SSO
  * Description: Cognito Hosted UI SSO for WordPress with optional user sync.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: RSL Group
  * Requires at least: 6.0
  * Requires PHP: 8.0
@@ -29,6 +29,7 @@ require_once WCSSO_PLUGIN_DIR . 'includes/class-jwt.php';
 require_once WCSSO_PLUGIN_DIR . 'includes/class-user-provisioner.php';
 require_once WCSSO_PLUGIN_DIR . 'includes/class-sso.php';
 require_once WCSSO_PLUGIN_DIR . 'includes/class-cognito-sync.php';
+require_once WCSSO_PLUGIN_DIR . 'includes/class-cognito-migration-endpoint.php';
 
 function wcsso_activate_plugin() {
     WCSSO_SSO::add_rewrite_rules();
@@ -46,6 +47,7 @@ add_action('plugins_loaded', function () {
     WCSSO_Settings::init();
     WCSSO_SSO::init();
     WCSSO_Cognito_Sync::init();
+    WCSSO_Cognito_Migration_Endpoint::init();
 });
 
 add_action('admin_init', function () {

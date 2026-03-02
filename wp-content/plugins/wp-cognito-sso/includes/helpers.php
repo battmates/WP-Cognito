@@ -30,6 +30,7 @@ function wcsso_get_default_settings() {
         'sync_role_attribute_name' => 'custom:user_role',
         'sync_on_profile_update' => 1,
         'sync_on_user_register' => 1,
+        'migration_shared_secret' => '',
         'debug' => 0,
         'jwt_verify' => 1,
     ];
