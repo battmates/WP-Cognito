@@ -1,5 +1,5 @@
 # WP-Cognito
-A Wordpress plugin to authenticate via the AWS Cognito Hosted UI
+A Wordpress plugin to authenticate via the AWS Cognito Hosted UI. Also provides support for Cognito Migration Lambda flow by introducing API endpoints for validating user credentials.
 
 ## Requirements
 

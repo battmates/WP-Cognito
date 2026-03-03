@@ -97,6 +97,7 @@ class WCSSO_Settings
         $sanitized['aws_secret_key'] = sanitize_text_field($input['aws_secret_key'] ?? $defaults['aws_secret_key']);
         $sanitized['aws_user_pool_id'] = sanitize_text_field($input['aws_user_pool_id'] ?? $defaults['aws_user_pool_id']);
         $sanitized['sync_role_attribute_name'] = sanitize_text_field($input['sync_role_attribute_name'] ?? $defaults['sync_role_attribute_name']);
+        $sanitized['sync_role_enabled'] = !empty($input['sync_role_enabled']) ? 1 : 0;
         $sanitized['sync_on_profile_update'] = !empty($input['sync_on_profile_update']) ? 1 : 0;
         $sanitized['sync_on_user_register'] = !empty($input['sync_on_user_register']) ? 1 : 0;
         $sanitized['migration_shared_secret'] = isset($input['migration_shared_secret']) ? trim((string) $input['migration_shared_secret']) : $defaults['migration_shared_secret'];
@@ -338,6 +339,10 @@ class WCSSO_Settings
                         <th scope="row"><label for="wcsso_aws_user_pool_id">User pool ID</label></th>
                         <td><input type="text" id="wcsso_aws_user_pool_id" name="wcsso_settings[aws_user_pool_id]"
                                 value="<?php echo esc_attr($settings['aws_user_pool_id']); ?>" class="regular-text" /></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Role sync</th>
+                        <td><label><input type="checkbox" name="wcsso_settings[sync_role_enabled]" value="1" <?php checked($settings['sync_role_enabled']); ?> /> Sync WordPress role attribute to Cognito</label></td>
                     </tr>
                     <tr>
                         <th scope="row"><label for="wcsso_sync_role_attribute_name">Role attribute name</label></th>

@@ -86,8 +86,11 @@ class WCSSO_Cognito_Sync {
             ['Name' => 'phone_number', 'Value' => $user_phone],
             ['Name' => 'phone_number_verified', 'Value' => $user_phone ? 'true' : 'false'],
             ['Name' => 'address', 'Value' => $address],
-            ['Name' => $role_attribute, 'Value' => $primary_role],
         ];
+
+        if (!empty($settings['sync_role_enabled'])) {
+            $attributes[] = ['Name' => $role_attribute, 'Value' => $primary_role];
+        }
 
         $raw_pass = apply_filters('wcsso_raw_password_for_user_sync', null, $user_id);
 

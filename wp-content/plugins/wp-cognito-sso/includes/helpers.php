@@ -28,6 +28,7 @@ function wcsso_get_default_settings() {
         'aws_secret_key' => '',
         'aws_user_pool_id' => '',
         'sync_role_attribute_name' => 'custom:user_role',
+        'sync_role_enabled' => 1,
         'sync_on_profile_update' => 1,
         'sync_on_user_register' => 1,
         'migration_shared_secret' => '',
