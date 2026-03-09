@@ -12,6 +12,7 @@ function wcsso_get_default_settings() {
         'login_enabled' => 0,
         'auto_redirect_login' => 0,
         'excluded_paths' => "/logout\n/cognito-login",
+        'new_user_redirect_url' => '',
         'logout_enabled' => 0,
         'logout_redirect_path' => '/logout',
         'provisioning_enabled' => 1,
@@ -52,6 +53,50 @@ function wcsso_get_setting($key, $default = null) {
         return $settings[$key];
     }
     return $default;
+}
+
+function wcsso_is_absolute_url($value) {
+    $value = trim((string) $value);
+    if ($value === '') {
+        return false;
+    }
+
+    return (bool) preg_match('#^https?://#i', $value);
+}
+
+function wcsso_sanitize_redirect_target($value) {
+    $value = trim((string) $value);
+    if ($value === '') {
+        return '';
+    }
+
+    if (wcsso_is_absolute_url($value)) {
+        return esc_url_raw($value, ['http', 'https']);
+    }
+
+    $parts = wp_parse_url($value);
+    if ($parts === false) {
+        return '';
+    }
+
+    $path = $parts['path'] ?? '';
+    $query = isset($parts['query']) ? '?' . $parts['query'] : '';
+    $fragment = isset($parts['fragment']) ? '#' . $parts['fragment'] : '';
+
+    return wcsso_normalize_path($path) . $query . $fragment;
+}
+
+function wcsso_resolve_redirect_target($value) {
+    $value = wcsso_sanitize_redirect_target($value);
+    if ($value === '') {
+        return '';
+    }
+
+    if (wcsso_is_absolute_url($value)) {
+        return $value;
+    }
+
+    return home_url($value);
 }
 
 function wcsso_normalize_path($path) {

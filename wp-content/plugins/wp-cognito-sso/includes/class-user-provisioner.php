@@ -41,6 +41,8 @@ class WCSSO_User_Provisioner {
                 return $user_id;
             }
 
+            update_user_meta($user_id, 'wcsso_pending_new_user_redirect', 1);
+
             $user = get_user_by('id', $user_id);
             $is_new = true;
         }

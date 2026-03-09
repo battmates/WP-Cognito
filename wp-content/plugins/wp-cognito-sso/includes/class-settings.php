@@ -78,6 +78,7 @@ class WCSSO_Settings
         $sanitized['login_enabled'] = !empty($input['login_enabled']) ? 1 : 0;
         $sanitized['auto_redirect_login'] = !empty($input['auto_redirect_login']) ? 1 : 0;
         $sanitized['excluded_paths'] = sanitize_textarea_field($input['excluded_paths'] ?? $defaults['excluded_paths']);
+        $sanitized['new_user_redirect_url'] = wcsso_sanitize_redirect_target($input['new_user_redirect_url'] ?? $defaults['new_user_redirect_url']);
 
         $sanitized['logout_enabled'] = !empty($input['logout_enabled']) ? 1 : 0;
         $sanitized['logout_redirect_path'] = wcsso_normalize_path($input['logout_redirect_path'] ?? $defaults['logout_redirect_path']);
@@ -198,6 +199,14 @@ class WCSSO_Settings
                             <textarea id="wcsso_excluded_paths" name="wcsso_settings[excluded_paths]" rows="5"
                                 class="large-text code"><?php echo esc_textarea($settings['excluded_paths']); ?></textarea>
                             <p class="description">One path per line, include leading slash.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="wcsso_new_user_redirect_url">New user redirect URL</label></th>
+                        <td>
+                            <input type="text" id="wcsso_new_user_redirect_url" name="wcsso_settings[new_user_redirect_url]"
+                                value="<?php echo esc_attr($settings['new_user_redirect_url']); ?>" class="regular-text" placeholder="/welcome" />
+                            <p class="description">Optional. For first-time Cognito-provisioned users only. Supports a relative path like <code>/welcome</code> or a full URL.</p>
                         </td>
                     </tr>
                 </table>

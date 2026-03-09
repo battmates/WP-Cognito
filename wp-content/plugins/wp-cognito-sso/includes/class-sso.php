@@ -177,7 +177,22 @@ class WCSSO_SSO {
         wp_set_auth_cookie($user_id);
 
         $redirect_to = home_url();
-        if (!empty($_GET['state'])) {
+        $new_user_redirect = trim((string) $settings['new_user_redirect_url']);
+        $is_new_user_login = (bool) get_user_meta($user_id, 'wcsso_pending_new_user_redirect', true);
+        $should_use_new_user_redirect = $is_new_user_login && !empty($new_user_redirect);
+
+        if ($should_use_new_user_redirect) {
+            $resolved_redirect = wcsso_resolve_redirect_target($new_user_redirect);
+            if ($resolved_redirect !== '') {
+                $redirect_to = $resolved_redirect;
+            }
+        }
+
+        if ($is_new_user_login) {
+            delete_user_meta($user_id, 'wcsso_pending_new_user_redirect');
+        }
+
+        if (!$should_use_new_user_redirect && !empty($_GET['state'])) {
             $state = json_decode(base64_decode(sanitize_text_field($_GET['state'])), true);
             if (!empty($state['redirect_to']) && wcsso_is_safe_redirect($state['redirect_to'])) {
                 $parsed = wp_parse_url($state['redirect_to']);
